@@ -9,6 +9,8 @@ aws ec2 create-key-pair \
   --query 'KeyMaterial' \
   --output text > my-rsa-key.pem
 
+  https://docs.aws.amazon.com/cli/v1/reference/ec2/create-key-pair.html
+
   Day2
   Create Security Group 
 
