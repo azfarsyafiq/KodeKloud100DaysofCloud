@@ -10,7 +10,7 @@ aws ec2 create-key-pair \
   --output text > my-rsa-key.pem
 
   Add user 
-  Command used
+  Command used: 
   sudo adduser kirsty
   id kirsty
 
