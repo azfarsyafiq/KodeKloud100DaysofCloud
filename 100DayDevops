@@ -1,0 +1,2 @@
+Day 2: Temporary User Setup with Expiry fr user named ravi
+sudo useradd -e 2026-12-07 ravi
