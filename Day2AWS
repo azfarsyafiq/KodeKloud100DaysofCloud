@@ -1,0 +1,84 @@
+Day 2 : Create NSG
+
+Question:
+The Nautilus DevOps team is strategizing the migration of a portion of their infrastructure to the AWS cloud. Recognizing the scale of this undertaking, they have opted to approach the migration in incremental steps rather than as a single massive transition. To achieve this, they have segmented large tasks into smaller, more manageable units. This granular approach enables the team to execute the migration in gradual phases, ensuring smoother implementation and minimizing disruption to ongoing operations. By breaking down the migration into smaller tasks, the Nautilus DevOps team can systematically progress through each stage, allowing for better control, risk mitigation, and optimization of resources throughout the migration process.
+For this task, create a security group under default VPC with the following requirements:
+
+Name of the security group is xfusion-sg.
+
+The description must be Security group for Nautilus App Servers
+
+Add the inbound rule of type HTTP, with port range of 80. Enter the source CIDR range of 0.0.0.0/0.
+
+Add another inbound rule of type SSH, with port range of 22. Enter the source CIDR range of 0.0.0.0/0.
+
+
+Solution:
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-vpcs
+{
+    "Vpcs": [
+        {
+            "OwnerId": "115600252994",
+            "InstanceTenancy": "default",
+            "CidrBlockAssociationSet": [
+                {
+                    "AssociationId": "vpc-cidr-assoc-0d6fd8f47173cd515",
+                    "CidrBlock": "172.31.0.0/16",
+                    "CidrBlockState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "IsDefault": true,
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "VpcId": "vpc-0dd688c6239d0fe5d",
+            "State": "available",
+            "CidrBlock": "172.31.0.0/16",
+            "DhcpOptionsId": "dopt-039f5acff0d4b46df"
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ➜  aws ec2 create-security-group --group-name xfusion-sg --description "Security group for Nautilus App Servers" --vpc-id vpc-0dd688c6239d0fe5d
+{
+    "GroupId": "sg-00fc20ab094ca4c43",
+    "SecurityGroupArn": "arn:aws:ec2:us-east-1:115600252994:security-group/sg-00fc20ab094ca4c43"
+}
+
+~ on ☁️  (us-east-1) ➜  aws ec2 authorize-security-group-ingress --group-id "sg-00fc20ab094ca4c43" --protocol tcp --port 22 --cidr "0.0.0.0/0"
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-0b14eef2e751461fa",
+            "GroupId": "sg-00fc20ab094ca4c43",
+            "GroupOwnerId": "115600252994",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIpv4": "0.0.0.0/0",
+            "SecurityGroupRuleArn": "arn:aws:ec2:us-east-1:115600252994:security-group-rule/sgr-0b14eef2e751461fa"
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ➜  aws ec2 authorize-security-group-ingress --group-id "sg-00fc20ab094ca4c43" --protocol tcp --port 80 --cidr "0.0.0.0/0"
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-01fee5497406ca106",
+            "GroupId": "sg-00fc20ab094ca4c43",
+            "GroupOwnerId": "115600252994",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 80,
+            "ToPort": 80,
+            "CidrIpv4": "0.0.0.0/0",
+            "SecurityGroupRuleArn": "arn:aws:ec2:us-east-1:115600252994:security-group-rule/sgr-01fee5497406ca106"
+        }
+    ]
+}
