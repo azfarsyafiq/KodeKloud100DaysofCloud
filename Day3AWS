@@ -1,0 +1,73 @@
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-subnets --query "Subnets[].CidrBlock"
+[
+    "172.31.64.0/20",
+    "172.31.48.0/20",
+    "172.31.16.0/20",
+    "172.31.32.0/20",
+    "172.31.0.0/20",
+    "172.31.80.0/20"
+]
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-vpcs
+{
+    "Vpcs": [
+        {
+            "OwnerId": "658733160186",
+            "InstanceTenancy": "default",
+            "CidrBlockAssociationSet": [
+                {
+                    "AssociationId": "vpc-cidr-assoc-0e87241cef272b219",
+                    "CidrBlock": "172.31.0.0/16",
+                    "CidrBlockState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "IsDefault": true,
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "VpcId": "vpc-07e75f1362fa31473",
+            "State": "available",
+            "CidrBlock": "172.31.0.0/16",
+            "DhcpOptionsId": "dopt-08882a283ec832724"
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ➜  aws ec2 create-subnet \
+  --vpc-id vpc-07e75f1362fa31473 \
+  --cidr-block 172.31.96.0/24 \
+  --availability-zone us-east-1a \
+  --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=xfusion-subnet}]'
+{
+    "Subnet": {
+        "AvailabilityZoneId": "use1-az1",
+        "MapCustomerOwnedIpOnLaunch": false,
+        "OwnerId": "658733160186",
+        "AssignIpv6AddressOnCreation": false,
+        "Ipv6CidrBlockAssociationSet": [],
+        "Tags": [
+            {
+                "Key": "Name",
+                "Value": "xfusion-subnet"
+            }
+        ],
+        "SubnetArn": "arn:aws:ec2:us-east-1:658733160186:subnet/subnet-050178806f2ee2cf5",
+        "EnableDns64": false,
+        "Ipv6Native": false,
+        "PrivateDnsNameOptionsOnLaunch": {
+            "HostnameType": "ip-name",
+            "EnableResourceNameDnsARecord": false,
+            "EnableResourceNameDnsAAAARecord": false
+        },
+        "SubnetId": "subnet-050178806f2ee2cf5",
+        "State": "available",
+        "VpcId": "vpc-07e75f1362fa31473",
+        "CidrBlock": "172.31.96.0/24",
+        "AvailableIpAddressCount": 251,
+        "AvailabilityZone": "us-east-1a",
+        "DefaultForAz": false,
+        "MapPublicIpOnLaunch": false
+    }
+}
