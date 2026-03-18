@@ -1,0 +1,26 @@
+Data protection and recovery are fundamental aspects of data management. It's essential to have systems in place to ensure that data can be recovered in case of accidental deletion or corruption. The DevOps team has received a requirement for implementing such measures for one of the S3 buckets they are managing.
+
+The s3 bucket name is nautilus-s3-29431, enable versioning for this bucket.
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html
+https://docs.aws.amazon.com/cli/latest/reference/s3/
+
+
+
+~ on ☁️  (us-east-1) ➜  
+aws s3api put-bucket-versioning --bucket nautilus-s3-29431 --versioning-configuration Status=Enabled             
+                        
+
+~ on ☁️  (us-east-1) ➜  aws s3 ls
+2026-03-18 01:05:42 nautilus-s3-29431
+
+~ on ☁️  (us-east-1) ➜  aws s3api get-bucket-policy-status --bucket nautilus-s3-29431
+
+An error occurred (NoSuchBucketPolicy) when calling the GetBucketPolicyStatus operation: The bucket policy does not exist
+
+~ on ☁️  (us-east-1) ✖ aws s3api get-bucket-versioning --bucket  nautilus-s3-29431
+{
+    "Status": "Enabled"
+}
+
+~ on ☁️  (us-east-1) ➜  
