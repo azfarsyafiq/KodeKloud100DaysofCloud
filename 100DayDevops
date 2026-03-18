@@ -1,2 +1,7 @@
 Day 2: Temporary User Setup with Expiry fr user named ravi
 sudo useradd -e 2026-12-07 ravi
+
+Day3: Your task is to disable direct SSH root login on all app servers within the Stratos Datacenter.
+sudo nano /etc/ssh/sshd_config
+change PermitRootLogin yes --> PermitRootLogin no and save
+sudo systemctl restart sshd
