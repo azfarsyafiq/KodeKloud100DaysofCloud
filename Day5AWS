@@ -1,0 +1,102 @@
+Create a volume with the following requirements:
+
+Name of the volume should be datacenter-volume.
+
+Volume type must be gp3.
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-availability-zones 
+{
+    "AvailabilityZones": [
+        {
+            "OptInStatus": "opt-in-not-required",
+            "Messages": [],
+            "RegionName": "us-east-1",
+            "ZoneName": "us-east-1a",
+            "ZoneId": "use1-az6",
+            "GroupName": "us-east-1-zg-1",
+            "NetworkBorderGroup": "us-east-1",
+            "ZoneType": "availability-zone",
+            "GroupLongName": "US East (N. Virginia) 1",
+            "State": "available"
+        },
+        {
+            "OptInStatus": "opt-in-not-required",
+            "Messages": [],
+            "RegionName": "us-east-1",
+            "ZoneName": "us-east-1b",
+            "ZoneId": "use1-az1",
+            "GroupName": "us-east-1-zg-1",
+            "NetworkBorderGroup": "us-east-1",
+            "ZoneType": "availability-zone",
+            "GroupLongName": "US East (N. Virginia) 1",
+            "State": "available"
+        },
+        {
+            "OptInStatus": "opt-in-not-required",
+            "Messages": [],
+            "RegionName": "us-east-1",
+            "ZoneName": "us-east-1c",
+            "ZoneId": "use1-az2",
+            "GroupName": "us-east-1-zg-1",
+            "NetworkBorderGroup": "us-east-1",
+            "ZoneType": "availability-zone",
+            "GroupLongName": "US East (N. Virginia) 1",
+            "State": "available"
+        },
+        {
+            "OptInStatus": "opt-in-not-required",
+            "Messages": [],
+            "RegionName": "us-east-1",
+            "ZoneName": "us-east-1d",
+            "ZoneId": "use1-az4",
+            "GroupName": "us-east-1-zg-1",
+            "NetworkBorderGroup": "us-east-1",
+            "ZoneType": "availability-zone",
+            "GroupLongName": "US East (N. Virginia) 1",
+            "State": "available"
+        },
+        {
+            "OptInStatus": "opt-in-not-required",
+            "Messages": [],
+            "RegionName": "us-east-1",
+            "ZoneName": "us-east-1e",
+            "ZoneId": "use1-az3",
+            "GroupName": "us-east-1-zg-1",
+            "NetworkBorderGroup": "us-east-1",
+            "ZoneType": "availability-zone",
+            "GroupLongName": "US East (N. Virginia) 1",
+            "State": "available"
+        },
+        {
+            "OptInStatus": "opt-in-not-required",
+            "Messages": [],
+            "RegionName": "us-east-1",
+            "ZoneName": "us-east-1f",
+            "ZoneId": "use1-az5",
+            "GroupName": "us-east-1-zg-1",
+            "NetworkBorderGroup": "us-east-1",
+            "ZoneType": "availability-zone",
+            "GroupLongName": "US East (N. Virginia) 1",
+            "State": "available"
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ✖ aws ec2 create-volume \
+> --availability-zone us-east-1a \
+> --size 2 \
+> --volume-type gp3
+{
+    "Iops": 3000,
+    "Tags": [],
+    "VolumeType": "gp3",
+    "MultiAttachEnabled": false,
+    "Throughput": 125,
+    "VolumeId": "vol-05a6ecf0ec66daad7",
+    "Size": 2,
+    "SnapshotId": "",
+    "AvailabilityZone": "us-east-1a",
+    "State": "creating",
+    "CreateTime": "2026-03-30T04:12:16.000Z",
+    "Encrypted": false
+}
