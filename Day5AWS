@@ -4,6 +4,8 @@ Name of the volume should be datacenter-volume.
 
 Volume type must be gp3.
 
+Size should be 2GB.
+
 ~ on ☁️  (us-east-1) ➜  aws ec2 describe-availability-zones 
 {
     "AvailabilityZones": [
@@ -82,21 +84,27 @@ Volume type must be gp3.
     ]
 }
 
-~ on ☁️  (us-east-1) ✖ aws ec2 create-volume \
-> --availability-zone us-east-1a \
+~ on ☁️  (us-east-1) ➜  aws ec2 create-volume \
+> --volume-type gp3 \
 > --size 2 \
-> --volume-type gp3
+> --availability-zone us-east-1a \
+> --tag-specifications 'ResourceType=volume,Tags=[{Key=Name,Value=devops-volume}]'
 {
     "Iops": 3000,
-    "Tags": [],
+    "Tags": [
+        {
+            "Key": "Name",
+            "Value": "devops-volume"
+        }
+    ],
     "VolumeType": "gp3",
     "MultiAttachEnabled": false,
     "Throughput": 125,
-    "VolumeId": "vol-05a6ecf0ec66daad7",
+    "VolumeId": "vol-079be55f100da8f62",
     "Size": 2,
     "SnapshotId": "",
     "AvailabilityZone": "us-east-1a",
     "State": "creating",
-    "CreateTime": "2026-03-30T04:12:16.000Z",
+    "CreateTime": "2026-03-30T04:20:31.000Z",
     "Encrypted": false
 }
