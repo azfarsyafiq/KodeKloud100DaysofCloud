@@ -1,0 +1,170 @@
+For this task, create an EC2 instance with following requirements:
+
+1) The name of the instance must be datacenter-ec2.
+
+2) You can use the Amazon Linux AMI to launch this instance.
+
+3) The Instance type must be t2.micro.
+
+4) Create a new RSA key pair named datacenter-kp.
+
+5) Attach the default (available by default) security group.
+
+Crete keypair:
+aws ec2 create-key-pair \
+    --key-name datacenter-kp \
+    --key-type rsa \
+    --query 'KeyMaterial' \
+    --output text > datacenter-kp.pem
+
+Change keypair permission:
+chmod 400 datacenter-kp.pem
+
+Check AMI images:
+aws ec2 describe-images \
+    --owners amazon \
+    --filters "Name=name,Values=amzn2-ami-hvm-*-x86_64-gp2" \
+    --query 'Images[*].[ImageId,CreationDate]' \
+    --output text | sort -k2 -r | head -n 1
+ami-05024c2628f651b80   2026-02-26T18:41:41.000Z
+
+Attach key to EC2 instance, run EC2 installed from AMI with type t2.micro :
+aws ec2 run-instances \
+--image-id ami-05024c2628f651b80 \
+--count 1 \
+--instance-type t2.micro \
+--key-name datacenter-kp \
+--security-groups default \
+--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=datacenter-ec2}]'
+
+{
+    "ReservationId": "r-074de9d05cbecea43",
+    "OwnerId": "115067058098",
+    "Groups": [],
+    "Instances": [
+        {
+            "Architecture": "x86_64",
+            "BlockDeviceMappings": [],
+            "ClientToken": "85e31979-be12-479a-9179-69f3aa5a8284",
+            "EbsOptimized": false,
+            "EnaSupport": true,
+            "Hypervisor": "xen",
+            "NetworkInterfaces": [
+                {
+                    "Attachment": {
+                        "AttachTime": "2026-04-01T01:27:47.000Z",
+                        "AttachmentId": "eni-attach-0bb0e92deb8039317",
+                        "DeleteOnTermination": true,
+                        "DeviceIndex": 0,
+                        "Status": "attaching",
+                        "NetworkCardIndex": 0
+                    },
+                    "Description": "",
+                    "Groups": [
+                        {
+                            "GroupId": "sg-0d31af5d82a8aacfa",
+                            "GroupName": "default"
+                        }
+                    ],
+                    "Ipv6Addresses": [],
+                    "MacAddress": "0a:ff:e9:bf:81:7b",
+                    "NetworkInterfaceId": "eni-0d42cf7d6b174f87d",
+                    "OwnerId": "115067058098",
+                    "PrivateDnsName": "ip-172-31-18-102.ec2.internal",
+                    "PrivateIpAddress": "172.31.18.102",
+                    "PrivateIpAddresses": [
+                        {
+                            "Primary": true,
+                            "PrivateDnsName": "ip-172-31-18-102.ec2.internal",
+                            "PrivateIpAddress": "172.31.18.102"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Status": "in-use",
+                    "SubnetId": "subnet-0bda204b63175da93",
+                    "VpcId": "vpc-066abf6ccd0eb451c",
+                    "InterfaceType": "interface",
+                    "Operator": {
+                        "Managed": false
+                    }
+                }
+            ],
+            "RootDeviceName": "/dev/xvda",
+            "RootDeviceType": "ebs",
+            "SecurityGroups": [
+                {
+                    "GroupId": "sg-0d31af5d82a8aacfa",
+                    "GroupName": "default"
+                }
+            ],
+            "SourceDestCheck": true,
+            "StateReason": {
+                "Code": "pending",
+                "Message": "pending"
+            },
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "datacenter-ec2"
+                }
+            ],
+            "VirtualizationType": "hvm",
+            "CpuOptions": {
+                "CoreCount": 1,
+                "ThreadsPerCore": 1
+            },
+            "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "open"
+            },
+            "MetadataOptions": {
+                "State": "pending",
+                "HttpTokens": "optional",
+                "HttpPutResponseHopLimit": 1,
+                "HttpEndpoint": "enabled",
+                "HttpProtocolIpv6": "disabled",
+                "InstanceMetadataTags": "disabled"
+            },
+            "EnclaveOptions": {
+                "Enabled": false
+            },
+            "PrivateDnsNameOptions": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "MaintenanceOptions": {
+                "AutoRecovery": "default",
+                "RebootMigration": "default"
+            },
+            "CurrentInstanceBootMode": "legacy-bios",
+            "Operator": {
+                "Managed": false
+            },
+            "InstanceId": "i-0f2c3e2704e41a0a6",
+            "ImageId": "ami-05024c2628f651b80",
+            "State": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "PrivateDnsName": "ip-172-31-18-102.ec2.internal",
+            "PublicDnsName": "",
+            "StateTransitionReason": "",
+            "KeyName": "datacenter-kp",
+            "AmiLaunchIndex": 0,
+            "ProductCodes": [],
+            "InstanceType": "t2.micro",
+            "LaunchTime": "2026-04-01T01:27:47.000Z",
+            "Placement": {
+                "GroupName": "",
+                "Tenancy": "default",
+                "AvailabilityZone": "us-east-1a"
+            },
+            "Monitoring": {
+                "State": "disabled"
+            },
+            "SubnetId": "subnet-0bda204b63175da93",
+            "VpcId": "vpc-066abf6ccd0eb451c",
+            "PrivateIpAddress": "172.31.18.102"
+        }
+    ]
+}
