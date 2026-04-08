@@ -1,0 +1,167 @@
+Enabling stop protection on EC2 servers.
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-instances
+{
+    "Reservations": [
+        {
+            "ReservationId": "r-072731f1018880667",
+            "OwnerId": "266796635032",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2026-04-08T02:11:10.000Z",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0b206ef8dfe8c8b08"
+                            }
+                        }
+                    ],
+                    "ClientToken": "7aa9803b-9e18-4649-8ac3-091efa0b81a6",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-54-208-125-184.compute-1.amazonaws.com",
+                                "PublicIp": "54.208.125.184"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-04-08T02:11:09.000Z",
+                                "AttachmentId": "eni-attach-026735b2bb681fe92",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-0d644aa3c83122158",
+                                    "GroupName": "default"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "0a:ff:ca:fa:a7:6d",
+                            "NetworkInterfaceId": "eni-066af20037ea6b97e",
+                            "OwnerId": "266796635032",
+                            "PrivateDnsName": "ip-172-31-29-39.ec2.internal",
+                            "PrivateIpAddress": "172.31.29.39",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-54-208-125-184.compute-1.amazonaws.com",
+                                        "PublicIp": "54.208.125.184"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-29-39.ec2.internal",
+                                    "PrivateIpAddress": "172.31.29.39"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0289e1870c4900f90",
+                            "VpcId": "vpc-0a8b48823d8b580b0",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-0d644aa3c83122158",
+                            "GroupName": "default"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "datacenter-ec2"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 1
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-04-08T02:11:09.000Z",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "legacy-bios",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false
+                    },
+                    "InstanceId": "i-0cbb5ac960e08fd56",
+                    "ImageId": "ami-0c101f26f147fa7fd",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-31-29-39.ec2.internal",
+                    "PublicDnsName": "ec2-54-208-125-184.compute-1.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t2.micro",
+                    "LaunchTime": "2026-04-08T02:11:09.000Z",
+                    "Placement": {
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1d"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-0289e1870c4900f90",
+                    "VpcId": "vpc-0a8b48823d8b580b0",
+                    "PrivateIpAddress": "172.31.29.39",
+                    "PublicIpAddress": "54.208.125.184"
+                }
+            ]
+        }
+    ]
+}
+
+
+~ on ☁️  (us-east-1) ➜  aws ec2 modify-instance-attribute --instance-id i-0cbb5ac960e08fd56 --disable-api-stop 
