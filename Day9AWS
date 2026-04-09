@@ -1,0 +1,174 @@
+Disabling termination protection on EC2
+
+~ on ☁️  (us-east-1) ✖ aws ec2 describe-instances
+{
+    "Reservations": [
+        {
+            "ReservationId": "r-0fdd3ac6953f05730",
+            "OwnerId": "578728002789",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2026-04-09T00:51:27.000Z",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-064c44b8450371e97"
+                            }
+                        }
+                    ],
+                    "ClientToken": "bac1cc43-4614-41cc-8a92-593e83c0ea47",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-54-92-181-200.compute-1.amazonaws.com",
+                                "PublicIp": "54.92.181.200"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-04-09T00:51:26.000Z",
+                                "AttachmentId": "eni-attach-0aeeace6efa2df662",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-06245706b38f2788e",
+                                    "GroupName": "default"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "0e:ee:59:89:f0:01",
+                            "NetworkInterfaceId": "eni-02425337ff0ec210c",
+                            "OwnerId": "578728002789",
+                            "PrivateDnsName": "ip-172-31-32-135.ec2.internal",
+                            "PrivateIpAddress": "172.31.32.135",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-54-92-181-200.compute-1.amazonaws.com",
+                                        "PublicIp": "54.92.181.200"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-32-135.ec2.internal",
+                                    "PrivateIpAddress": "172.31.32.135"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-023231ac0e6856178",
+                            "VpcId": "vpc-0db9a62ef23dbd241",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-06245706b38f2788e",
+                            "GroupName": "default"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "nautilus-ec2"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 1
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-04-09T00:51:26.000Z",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "legacy-bios",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false
+                    },
+                    "InstanceId": "i-018b2e89839e6056c",
+                    "ImageId": "ami-0c101f26f147fa7fd",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-31-32-135.ec2.internal",
+                    "PublicDnsName": "ec2-54-92-181-200.compute-1.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t2.micro",
+                    "LaunchTime": "2026-04-09T00:51:26.000Z",
+                    "Placement": {
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-023231ac0e6856178",
+                    "VpcId": "vpc-0db9a62ef23dbd241",
+                    "PrivateIpAddress": "172.31.32.135",
+                    "PublicIpAddress": "54.92.181.200"
+                }
+            ]
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ✖ aws ec2 modify-instance-attribute --instance-id i-018b2e89839e6056c --disable-api-termination
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-instance-attribute --instance-id i-018b2e89839e6056c --attribute disableApiTermination
+{
+    "DisableApiTermination": {
+        "Value": true
+    },
+    "InstanceId": "i-018b2e89839e6056c"
+}
