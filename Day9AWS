@@ -1,4 +1,4 @@
-Disabling termination protection on EC2
+Disabling termination protection on EC2 
 
 ~ on ☁️  (us-east-1) ✖ aws ec2 describe-instances
 {
