@@ -1,0 +1,190 @@
+Add elastic IP to EC2
+
+There is an instance named devops-ec2 and an elastic-ip named devops-ec2-eip in us-east-1 region. Attach the devops-ec2-eip elastic-ip to the devops-ec2 instance.
+
+~ on ☁️  (us-east-1) ✖ aws ec2 describe-instances
+{
+    "Reservations": [
+        {
+            "ReservationId": "r-0f4d900e16e93bb72",
+            "OwnerId": "766182622417",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2026-04-13T01:02:27.000Z",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0807573f504a20f0f"
+                            }
+                        }
+                    ],
+                    "ClientToken": "99bf4acb-fc02-4334-8222-437133cc1d28",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-184-72-94-176.compute-1.amazonaws.com",
+                                "PublicIp": "184.72.94.176"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-04-13T01:02:26.000Z",
+                                "AttachmentId": "eni-attach-0fa2dee389b46ea9d",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-0f1bd1e72e9822228",
+                                    "GroupName": "default"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "0e:d1:cb:61:7a:9b",
+                            "NetworkInterfaceId": "eni-0f6585bddbf289e73",
+                            "OwnerId": "766182622417",
+                            "PrivateDnsName": "ip-172-31-34-165.ec2.internal",
+                            "PrivateIpAddress": "172.31.34.165",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-184-72-94-176.compute-1.amazonaws.com",
+                                        "PublicIp": "184.72.94.176"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-34-165.ec2.internal",
+                                    "PrivateIpAddress": "172.31.34.165"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-09f5152bae849b4d7",
+                            "VpcId": "vpc-0997c11d7c24e7ce9",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-0f1bd1e72e9822228",
+                            "GroupName": "default"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "devops-ec2"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 1
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-04-13T01:02:26.000Z",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "legacy-bios",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false
+                    },
+                    "InstanceId": "i-0f05a41f64575476a",
+                    "ImageId": "ami-0c101f26f147fa7fd",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-31-34-165.ec2.internal",
+                    "PublicDnsName": "ec2-184-72-94-176.compute-1.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t2.micro",
+                    "LaunchTime": "2026-04-13T01:02:26.000Z",
+                    "Placement": {
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-09f5152bae849b4d7",
+                    "VpcId": "vpc-0997c11d7c24e7ce9",
+                    "PrivateIpAddress": "172.31.34.165",
+                    "PublicIpAddress": "184.72.94.176"
+                }
+            ]
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ✖ aws ec2 describe-addresses
+{
+    "Addresses": [
+        {
+            "AllocationId": "eipalloc-0178c7e35b73037cf",
+            "Domain": "vpc",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "devops-ec2-eip"
+                }
+            ],
+            "PublicIpv4Pool": "amazon",
+            "NetworkBorderGroup": "us-east-1",
+            "PublicIp": "52.7.18.64"
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ➜  aws ec2 associate-address --instance-id i-0f05a41f64575476a --allocation-id eipalloc-0178c7e35b73037cf
+{
+    "AssociationId": "eipassoc-0e5bc5f78f2db442d"
+}
