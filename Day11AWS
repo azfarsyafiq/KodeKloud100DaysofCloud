@@ -1,0 +1,227 @@
+An instance named datacenter-ec2 and an elastic network interface named datacenter-eni already exists in us-east-1 region.
+
+Attach the datacenter-eni network interface to the datacenter-ec2 instance.
+Make sure status is attached before submitting the task.
+Please make sure instance initialisation has been completed before submitting this task.
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-instances
+{
+    "Reservations": [
+        {
+            "ReservationId": "r-0713794baf97ea863",
+            "OwnerId": "438137422704",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2026-04-14T04:22:48.000Z",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-00a874b5fc104f12b"
+                            }
+                        }
+                    ],
+                    "ClientToken": "e048ecf7-cc5d-467c-ba2d-df40efd0c82a",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-13-220-27-84.compute-1.amazonaws.com",
+                                "PublicIp": "13.220.27.84"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-04-14T04:22:48.000Z",
+                                "AttachmentId": "eni-attach-0508f26e3fd19732c",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-05d99b5f627b544f0",
+                                    "GroupName": "default"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:d9:a3:39:98:05",
+                            "NetworkInterfaceId": "eni-0ebb4ede3dbc4cb94",
+                            "OwnerId": "438137422704",
+                            "PrivateDnsName": "ip-172-31-5-150.ec2.internal",
+                            "PrivateIpAddress": "172.31.5.150",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-13-220-27-84.compute-1.amazonaws.com",
+                                        "PublicIp": "13.220.27.84"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-5-150.ec2.internal",
+                                    "PrivateIpAddress": "172.31.5.150"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-045d7c30e840952c0",
+                            "VpcId": "vpc-0d9e5ca72400034c2",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-05d99b5f627b544f0",
+                            "GroupName": "default"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "datacenter-ec2"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 1
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-04-14T04:22:48.000Z",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "legacy-bios",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false
+                    },
+                    "InstanceId": "i-021b4cfa58991fd7f",
+                    "ImageId": "ami-0c101f26f147fa7fd",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-31-5-150.ec2.internal",
+                    "PublicDnsName": "ec2-13-220-27-84.compute-1.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t2.micro",
+                    "LaunchTime": "2026-04-14T04:22:48.000Z",
+                    "Placement": {
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-045d7c30e840952c0",
+                    "VpcId": "vpc-0d9e5ca72400034c2",
+                    "PrivateIpAddress": "172.31.5.150",
+                    "PublicIpAddress": "13.220.27.84"
+                }
+            ]
+        }
+    ]
+}
+
+
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-network-interfaces --filters "Name=tag:Name,Values=datacenter-eni"
+{
+    "NetworkInterfaces": [
+        {
+            "AvailabilityZone": "us-east-1a",
+            "Description": "datacenter-eni",
+            "Groups": [
+                {
+                    "GroupId": "sg-05d99b5f627b544f0",
+                    "GroupName": "default"
+                }
+            ],
+            "InterfaceType": "interface",
+            "Ipv6Addresses": [],
+            "MacAddress": "02:13:b6:e4:47:45",
+            "NetworkInterfaceId": "eni-059072be1efd79e94",
+            "OwnerId": "438137422704",
+            "PrivateDnsName": "ip-172-31-5-42.ec2.internal",
+            "PrivateIpAddress": "172.31.5.42",
+            "PrivateIpAddresses": [
+                {
+                    "Primary": true,
+                    "PrivateDnsName": "ip-172-31-5-42.ec2.internal",
+                    "PrivateIpAddress": "172.31.5.42"
+                }
+            ],
+            "RequesterId": "AIDAWMAYGQNYGDV65KEUD",
+            "RequesterManaged": false,
+            "SourceDestCheck": true,
+            "Status": "available",
+            "SubnetId": "subnet-045d7c30e840952c0",
+            "TagSet": [
+                {
+                    "Key": "Name",
+                    "Value": "datacenter-eni"
+                }
+            ],
+            "VpcId": "vpc-0d9e5ca72400034c2",
+            "Operator": {
+                "Managed": false
+            }
+        }
+    ]
+}
+
+
+~ on ☁️  (us-east-1) ➜  aws ec2 attach-network-interface \
+> --network-interface-id eni-059072be1efd79e94 \
+> --instance-id i-021b4cfa58991fd7f \
+> --device-index 1 \
+> 
+{
+    "AttachmentId": "eni-attach-02c16732bc2591d4c",
+    "NetworkCardIndex": 0
+}
+
