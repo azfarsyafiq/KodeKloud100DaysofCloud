@@ -1,0 +1,229 @@
+An instance named devops-ec2 and a volume named devops-volume already exists in us-east-1 region.
+Attach the devops-volume volume to the devops-ec2 instance, make sure to set the device name to /dev/sdb while attaching the volume.
+
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-instances
+{
+    "Reservations": [
+        {
+            "ReservationId": "r-09f2feea7586a5905",
+            "OwnerId": "389585776552",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2026-04-16T01:14:43.000Z",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-02ab5f2517d120412"
+                            }
+                        }
+                    ],
+                    "ClientToken": "6f4bc195-4e06-498d-b8f4-22ce3d5cb905",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-13-221-84-176.compute-1.amazonaws.com",
+                                "PublicIp": "13.221.84.176"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-04-16T01:14:42.000Z",
+                                "AttachmentId": "eni-attach-00f2f8c03af9debd1",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-01ce935a94c773814",
+                                    "GroupName": "default"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "0a:ff:da:b0:0a:3b",
+                            "NetworkInterfaceId": "eni-00e5e571d64a667d9",
+                            "OwnerId": "389585776552",
+                            "PrivateDnsName": "ip-172-31-22-96.ec2.internal",
+                            "PrivateIpAddress": "172.31.22.96",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-13-221-84-176.compute-1.amazonaws.com",
+                                        "PublicIp": "13.221.84.176"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-22-96.ec2.internal",
+                                    "PrivateIpAddress": "172.31.22.96"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0553fba58e8937cc3",
+                            "VpcId": "vpc-0640d6f3e2b716611",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-01ce935a94c773814",
+                            "GroupName": "default"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "devops-ec2"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 1
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-04-16T01:14:42.000Z",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "legacy-bios",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false
+                    },
+                    "InstanceId": "i-087575453fcf53d2f",
+                    "ImageId": "ami-0c101f26f147fa7fd",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-31-22-96.ec2.internal",
+                    "PublicDnsName": "ec2-13-221-84-176.compute-1.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t2.micro",
+                    "LaunchTime": "2026-04-16T01:14:42.000Z",
+                    "Placement": {
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-0553fba58e8937cc3",
+                    "VpcId": "vpc-0640d6f3e2b716611",
+                    "PrivateIpAddress": "172.31.22.96",
+                    "PublicIpAddress": "13.221.84.176"
+                }
+            ]
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-volumes
+{
+    "Volumes": [
+        {
+            "Iops": 100,
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "devops-volume"
+                }
+            ],
+            "VolumeType": "gp2",
+            "MultiAttachEnabled": false,
+            "Operator": {
+                "Managed": false
+            },
+            "VolumeId": "vol-09a4783d383dd9a73",
+            "Size": 5,
+            "SnapshotId": "",
+            "AvailabilityZone": "us-east-1a",
+            "State": "available",
+            "CreateTime": "2026-04-16T01:14:43.496Z",
+            "Attachments": [],
+            "Encrypted": false
+        },
+        {
+            "Iops": 3000,
+            "VolumeType": "gp3",
+            "MultiAttachEnabled": false,
+            "Throughput": 125,
+            "Operator": {
+                "Managed": false
+            },
+            "VolumeId": "vol-02ab5f2517d120412",
+            "Size": 8,
+            "SnapshotId": "snap-04819fa0d2620618b",
+            "AvailabilityZone": "us-east-1a",
+            "State": "in-use",
+            "CreateTime": "2026-04-16T01:14:43.363Z",
+            "Attachments": [
+                {
+                    "DeleteOnTermination": true,
+                    "VolumeId": "vol-02ab5f2517d120412",
+                    "InstanceId": "i-087575453fcf53d2f",
+                    "Device": "/dev/xvda",
+                    "State": "attached",
+                    "AttachTime": "2026-04-16T01:14:43.000Z"
+                }
+            ],
+            "Encrypted": false
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ➜  aws ec2 attach-volume --volume-id vol-09a4783d383dd9a73 --instance-id i-087575453fcf53d2f --device /dev/sdb
+{
+    "VolumeId": "vol-09a4783d383dd9a73",
+    "InstanceId": "i-087575453fcf53d2f",
+    "Device": "/dev/sdb",
+    "State": "attaching",
+    "AttachTime": "2026-04-16T01:19:53.460Z"
+}
