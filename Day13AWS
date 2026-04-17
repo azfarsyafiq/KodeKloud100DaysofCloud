@@ -1,0 +1,178 @@
+For this task, create an AMI from an existing EC2 instance named xfusion-ec2 with the following requirement:
+
+Name of the AMI should be xfusion-ec2-ami, make sure AMI is in available state.
+
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-instances
+{
+    "Reservations": [
+        {
+            "ReservationId": "r-0b4143d25903157fb",
+            "OwnerId": "453274592256",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2026-04-17T01:13:23.000Z",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0ff9f5b38ade2637d"
+                            }
+                        }
+                    ],
+                    "ClientToken": "bed8a396-e42c-4685-93c1-aed3f6e1b221",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-107-22-81-10.compute-1.amazonaws.com",
+                                "PublicIp": "107.22.81.10"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-04-17T01:13:22.000Z",
+                                "AttachmentId": "eni-attach-0400c5b664149c16a",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-053bb30c9b3e2bf53",
+                                    "GroupName": "default"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "0a:ff:e8:2a:42:a7",
+                            "NetworkInterfaceId": "eni-048993cbc9f51c90c",
+                            "OwnerId": "453274592256",
+                            "PrivateDnsName": "ip-172-31-24-103.ec2.internal",
+                            "PrivateIpAddress": "172.31.24.103",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-107-22-81-10.compute-1.amazonaws.com",
+                                        "PublicIp": "107.22.81.10"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-24-103.ec2.internal",
+                                    "PrivateIpAddress": "172.31.24.103"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0f5e8296c7feee681",
+                            "VpcId": "vpc-0e90fb0eb48b28443",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-053bb30c9b3e2bf53",
+                            "GroupName": "default"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "xfusion-ec2"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 1
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-04-17T01:13:22.000Z",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "legacy-bios",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false
+                    },
+                    "InstanceId": "i-00e719e2141e4984e",
+                    "ImageId": "ami-0c101f26f147fa7fd",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-31-24-103.ec2.internal",
+                    "PublicDnsName": "ec2-107-22-81-10.compute-1.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t2.micro",
+                    "LaunchTime": "2026-04-17T01:13:22.000Z",
+                    "Placement": {
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1d"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-0f5e8296c7feee681",
+                    "VpcId": "vpc-0e90fb0eb48b28443",
+                    "PrivateIpAddress": "172.31.24.103",
+                    "PublicIpAddress": "107.22.81.10"
+                }
+            ]
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ✖ aws ec2 create-image --instance-id i-00e719e2141e4984e --name xfusion-ec2-ami --no-reboot
+{
+    "ImageId": "ami-0523dca30b880f3dc"
+}
+
+~ on ☁️  (us-east-1) ➜  aws ec2 describe-images --image-ids ami-0523dca30b880f3dc --query 'Images[0].State'
+"available"
+
+
+
