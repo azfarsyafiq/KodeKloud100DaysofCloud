@@ -1,0 +1,5 @@
+a. Install cronie package on all Nautilus app servers and start crond service.
+sudo dnf install cronie
+
+b. Add a cron */5 * * * * echo hello > /tmp/cron_text for root user.
+echo "*/5 * * * * echo hello > /tmp/cron_text" | sudo crontab -u root -
