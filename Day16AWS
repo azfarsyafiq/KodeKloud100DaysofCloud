@@ -1,0 +1,72 @@
+Create a snapshot of an existing volume named xfusion-vol in us-east-1 region.
+
+1) The name of the snapshot must be xfusion-vol-ss.
+
+2) The description must be xfusion Snapshot.
+
+3) Make sure the snapshot status is completed before submitting the task.
+~ on ☁️  (us-east-1) ✖ aws ec2 describe-volumes
+{
+    "Volumes": [
+        {
+            "Iops": 100,
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "xfusion-vol"
+                }
+            ],
+            "VolumeType": "gp2",
+            "MultiAttachEnabled": false,
+            "Operator": {
+                "Managed": false
+            },
+            "VolumeId": "vol-0b862b8a077ef359b",
+            "Size": 5,
+            "SnapshotId": "",
+            "AvailabilityZone": "us-east-1a",
+            "State": "available",
+            "CreateTime": "2026-04-20T00:52:42.007Z",
+            "Attachments": [],
+            "Encrypted": false
+        }
+    ]
+}
+
+~ on ☁️  (us-east-1) ➜  aws ec2 create-snapshot --volume-id vol-0b862b8a077ef359b --description "xfusion Snapshot" --tag-specifications 'ResourceType=snapshot,Tags=[{Key=Name,Value=xfusion-vol-ss}]'
+  
+~ on ☁️  (us-east-1) ✖ aws ec2 create-snapshot --volume-id vol-0b862b8a077ef359b --description "xfusion Snapshot"
+{
+    "Tags": [],
+    "SnapshotId": "snap-09e7314f3a2c26303",
+    "VolumeId": "vol-0b862b8a077ef359b",
+    "State": "pending",
+    "StartTime": "2026-04-20T00:58:49.999Z",
+    "Progress": "",
+    "OwnerId": "772360636157",
+    "Description": "xfusion Snapshot",
+    "VolumeSize": 5,
+    "Encrypted": false
+}
+
+~ on ☁️  (us-east-1) ✖ aws ec2 describe-snapshots --snapshot-ids snap-09e7314f3a2c26303
+{
+    "Snapshots": [
+        {
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2026-04-20T00:59:24.199Z",
+            "FullSnapshotSizeInBytes": 0,
+            "SnapshotId": "snap-09e7314f3a2c26303",
+            "VolumeId": "vol-0b862b8a077ef359b",
+            "State": "completed",
+            "StartTime": "2026-04-20T00:58:49.999Z",
+            "Progress": "100%",
+            "OwnerId": "772360636157",
+            "Description": "xfusion Snapshot",
+            "VolumeSize": 5,
+            "Encrypted": false
+        }
+    ]
+}
+
