@@ -1,0 +1,12 @@
+For this task, create an IAM user named iamuser_kirsty.
+
+aws-client ~ ➜  aws iam create-user --user-name iamuser_kirsty
+{
+    "User": {
+        "Path": "/",
+        "UserName": "iamuser_kirsty",
+        "UserId": "AIDAVDJLQWN3DNVYRIZ6R",
+        "Arn": "arn:aws:iam::350667977590:user/iamuser_kirsty",
+        "CreateDate": "2026-04-21T01:49:29Z"
+    }
+}
