@@ -1,0 +1,12 @@
+Create an IAM group named iamgroup_james.
+
+aws-client ~ ➜  aws iam create-group --group-name iamgroup_james
+{
+    "Group": {
+        "Path": "/",
+        "GroupName": "iamgroup_james",
+        "GroupId": "AGPAQMXIVHQ2FEA3OWDA5",
+        "Arn": "arn:aws:iam::027331476532:group/iamgroup_james",
+        "CreateDate": "2026-04-22T01:07:22Z"
+    }
+}
