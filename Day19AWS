@@ -1,0 +1,41 @@
+
+1. Create json file for iam policy
+2. Add policy
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EC2ReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeImages",
+        "ec2:DescribeSnapshots",
+        "ec2:DescribeVolumes",
+        "ec2:DescribeTags",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeKeyPairs",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeRegions",
+        "ec2:DescribeAvailabilityZones"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+3. Create the iam policy
+aws-client ~ ➜  aws iam create-policy --policy-name iampolicy_john --policy-document file://iampolicy_john.json
+{
+    "Policy": {
+        "PolicyName": "iampolicy_john",
+        "PolicyId": "ANPAXR77IOXALAI3XZWSM",
+        "Arn": "arn:aws:iam::519689500096:policy/iampolicy_john",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 0,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2026-04-23T01:21:54Z",
+        "UpdateDate": "2026-04-23T01:21:54Z"
+    }
+}
