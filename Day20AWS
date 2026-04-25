@@ -1,0 +1,19 @@
+An IAM user named iamuser_ravi and a policy named iampolicy_ravi already exist. Attach the IAM policy iampolicy_ravi to the IAM user iamuser_ravi.
+
+1. 
+aws-client ~ ➜  
+aws iam list-policies --query "Policies[?PolicyName=='iampolicy_ravi'].Arn" --output text
+arn:aws:iam::869896128647:policy/iampolicy_ravi
+
+2. 
+aws-client ~ ✖ aws iam attach-user-policy --user-name iamuser_ravi --policy-arn arn:aws:iam::869896128647:policy/iampolicy_ravi
+
+3.
+aws-client ~ ➜  aws iam list-attached-user-policies --user-name iamuser_ravi
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "iampolicy_ravi",
+            "PolicyArn": "arn:aws:iam::869896128647:policy/iampolicy_ravi"
+        }
+    ]
