@@ -1,9 +1,63 @@
 Create an IAM role as below:
 
-1) IAM role name must be iamrole_yousuf.
+1) IAM role name must be iamrole_javed.
+
+aws-client ~ ➜  touch iamrole_javed.json
+
+aws-client ~ ➜  vi iamrole_javed.json 
+
+aws-client ~ ➜  aws iam create-role --role-name iamrole_javed --assume-role-policy-document file://iamrole_javed.json
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "iamrole_javed",
+        "RoleId": "AROAWVGJRPBYCCDCXQIP5",
+        "Arn": "arn:aws:iam::457836689520:role/iamrole_javed",
+        "CreateDate": "2026-04-29T01:27:09Z",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "ec2.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        }
+    }
+}
 
 2) Entity type must be AWS Service and use case must be EC2.
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": { "Service": "ec2.amazonaws.com" },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
 
-3) Attach a policy named iampolicy_yousuf.
+
+
+
+3) Attach a policy named iampolicy_javed.
+aws-client ~ ➜  aws iam list-policies --query "Policies[?PolicyName=='iampolicy_javed'].Arn" --output text
+arn:aws:iam::457836689520:policy/iampolicy_javed
+
+aws-client ~ ➜  aws iam attach-role-policy --role-name iamrole_javed --policy-arn arn:aws:iam::457836689520:policy/iampolicy_javed
+
+aws-client ~ ➜  aws iam list-attached-role-policies --role-name iamrole_javed
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "iampolicy_javed",
+            "PolicyArn": "arn:aws:iam::457836689520:policy/iampolicy_javed"
+        }
+    ]
+}
 
 
