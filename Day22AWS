@@ -1,0 +1,234 @@
+The instance will be named xfusion-ec2, and the Elastic IP will be named xfusion-eip. 
+This setup will help the Development Team to have a reliable and consistent access point for their application.
+Create an EC2 instance named xfusion-ec2 using any linux AMI like ubuntu
+The Instance type must be t2.micro 
+Associate an Elastic IP address with this instance, name it as xfusion-eip.
+
+1. Check AMI ID
+aws-client ~ ➜  aws ec2 describe-images --owners 099720109477 \
+--filters "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*" \
+--query 'sort_by(Images, &CreationDate)[-1].ImageId' --output text
+ami-0ff290337e78c83bf
+
+2. Create keypair
+aws-client ~ ✖  aws ec2 create-key-pair --key-name myKeyPair --query 'KeyMaterial' --output text > myKeyPair.pem
+aws-client ~ ➜  chmod 400 myKeyPair.pem 
+
+3. Check security-group-id
+aws-client ~ ➜  aws ec2 describe-security-groups \
+    --query "SecurityGroups[*].{Name:GroupName,ID:GroupId,Vpc:VpcId}" \
+    --output table
+--------------------------------------------------------------
+|                   DescribeSecurityGroups                   |
++-----------------------+----------+-------------------------+
+|          ID           |  Name    |           Vpc           |
++-----------------------+----------+-------------------------+
+|  sg-018a853821f64ef29 |  default |  vpc-0b031b1901295e722  |
++-----------------------+----------+-------------------------+
+
+4. Check subnet-id 
+aws-client ~ ➜  aws ec2 describe-subnets \
+    --query "Subnets[*].{ID:SubnetId,AZ:AvailabilityZone,CIDR:CidrBlock}" \
+    --output table
+--------------------------------------------------------------
+|                       DescribeSubnets                      |
++------------+------------------+----------------------------+
+|     AZ     |      CIDR        |            ID              |
++------------+------------------+----------------------------+
+|  us-east-1b|  172.31.0.0/20   |  subnet-02bedce3d6acf3f92  |
+|  us-east-1c|  172.31.80.0/20  |  subnet-03465483b00579171  |
+|  us-east-1f|  172.31.64.0/20  |  subnet-0720bfb101cae5457  |
+|  us-east-1d|  172.31.16.0/20  |  subnet-0b67f2b19a55191c6  |
+|  us-east-1e|  172.31.48.0/20  |  subnet-05658c40a6a0ac131  |
+|  us-east-1a|  172.31.32.0/20  |  subnet-0ab60e225e55b4c0d  |
++------------+------------------+----------------------------+
+
+5. Create EC2 instance 
+aws ec2 run-instances \
+    --image-id ami-0ff290337e78c83bf \
+    --count 1 \
+    --instance-type t2.micro \
+    --key-name myKeyPair \
+    --security-group-ids sg-018a853821f64ef29 \
+    --subnet-id subnet-0ab60e225e55b4c0d
+{
+    "ReservationId": "r-0e836e96f426bac86",
+    "OwnerId": "634248103192",
+    "Groups": [],
+    "Instances": [
+        {
+            "Architecture": "x86_64",
+            "BlockDeviceMappings": [],
+            "ClientToken": "14088064-608a-4a38-a5ee-4eea999d9cc8",
+            "EbsOptimized": false,
+            "EnaSupport": true,
+            "Hypervisor": "xen",
+            "NetworkInterfaces": [
+                {
+                    "Attachment": {
+                        "AttachTime": "2026-04-30T02:04:40.000Z",
+                        "AttachmentId": "eni-attach-04fb9bd2caaab8479",
+                        "DeleteOnTermination": true,
+                        "DeviceIndex": 0,
+                        "Status": "attaching",
+                        "NetworkCardIndex": 0
+                    },
+                    "Description": "",
+                    "Groups": [
+                        {
+                            "GroupId": "sg-018a853821f64ef29",
+                            "GroupName": "default"
+                        }
+                    ],
+                    "Ipv6Addresses": [],
+                    "MacAddress": "0e:f5:e7:43:42:f7",
+                    "NetworkInterfaceId": "eni-0fa4a38ca0cfb9cd5",
+                    "OwnerId": "634248103192",
+                    "PrivateDnsName": "ip-172-31-43-108.ec2.internal",
+                    "PrivateIpAddress": "172.31.43.108",
+                    "PrivateIpAddresses": [
+                        {
+                            "Primary": true,
+                            "PrivateDnsName": "ip-172-31-43-108.ec2.internal",
+                            "PrivateIpAddress": "172.31.43.108"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Status": "in-use",
+                    "SubnetId": "subnet-0ab60e225e55b4c0d",
+                    "VpcId": "vpc-0b031b1901295e722",
+                    "InterfaceType": "interface",
+                    "Operator": {
+                        "Managed": false
+                    }
+                }
+            ],
+            "RootDeviceName": "/dev/sda1",
+            "RootDeviceType": "ebs",
+            "SecurityGroups": [
+                {
+                    "GroupId": "sg-018a853821f64ef29",
+                    "GroupName": "default"
+                }
+            ],
+            "SourceDestCheck": true,
+            "StateReason": {
+                "Code": "pending",
+                "Message": "pending"
+            },
+            "VirtualizationType": "hvm",
+            "CpuOptions": {
+                "CoreCount": 1,
+                "ThreadsPerCore": 1
+            },
+            "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "open"
+            },
+            "MetadataOptions": {
+                "State": "pending",
+                "HttpTokens": "optional",
+                "HttpPutResponseHopLimit": 1,
+                "HttpEndpoint": "enabled",
+                "HttpProtocolIpv6": "disabled",
+                "InstanceMetadataTags": "disabled"
+            },
+            "EnclaveOptions": {
+                "Enabled": false
+            },
+            "BootMode": "uefi-preferred",
+            "PrivateDnsNameOptions": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "MaintenanceOptions": {
+                "AutoRecovery": "default",
+                "RebootMigration": "default"
+            },
+            "CurrentInstanceBootMode": "legacy-bios",
+            "Operator": {
+                "Managed": false
+            },
+            "InstanceId": "i-00514caa8b79ed32b",
+            "ImageId": "ami-0ff290337e78c83bf",
+            "State": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "PrivateDnsName": "ip-172-31-43-108.ec2.internal",
+            "PublicDnsName": "",
+            "StateTransitionReason": "",
+            "KeyName": "myKeyPair",
+            "AmiLaunchIndex": 0,
+            "ProductCodes": [],
+            "InstanceType": "t2.micro",
+            "LaunchTime": "2026-04-30T02:04:40.000Z",
+            "Placement": {
+                "AvailabilityZoneId": "use1-az6",
+                "GroupName": "",
+                "Tenancy": "default",
+                "AvailabilityZone": "us-east-1a"
+            },
+            "Monitoring": {
+                "State": "disabled"
+            },
+            "SubnetId": "subnet-0ab60e225e55b4c0d",
+            "VpcId": "vpc-0b031b1901295e722",
+            "PrivateIpAddress": "172.31.43.108"
+        }
+    ]
+}
+
+6. Create ENI
+aws ec2 create-network-interface --subnet-id subnet-0ab60e225e55b4c0d
+{
+    "NetworkInterface": {
+        "AvailabilityZone": "us-east-1a",
+        "Description": "",
+        "Groups": [
+            {
+                "GroupId": "sg-018a853821f64ef29",
+                "GroupName": "default"
+            }
+        ],
+        "InterfaceType": "interface",
+        "Ipv6Addresses": [],
+        "MacAddress": "0e:0e:3c:07:29:79",
+        "NetworkInterfaceId": "eni-044d72a2c9a622bc4",
+        "OwnerId": "634248103192",
+        "PrivateDnsName": "ip-172-31-32-123.ec2.internal",
+        "PrivateIpAddress": "172.31.32.123",
+        "PrivateIpAddresses": [
+            {
+                "Primary": true,
+                "PrivateDnsName": "ip-172-31-32-123.ec2.internal",
+                "PrivateIpAddress": "172.31.32.123"
+            }
+        ],
+        "RequesterId": "AIDAZHLBCAUMIEKCNAHPC",
+        "RequesterManaged": false,
+        "SourceDestCheck": true,
+        "Status": "pending",
+        "SubnetId": "subnet-0ab60e225e55b4c0d",
+        "TagSet": [],
+        "VpcId": "vpc-0b031b1901295e722",
+        "Operator": {
+            "Managed": false
+        },
+        "AvailabilityZoneId": "use1-az6"
+    }
+}
+
+7. Attach ENI
+
+aws ec2 attach-network-interface \
+    --network-interface-id eni-044d72a2c9a622bc4 \
+    --instance-id i-00514caa8b79ed32b \
+    --device-index 1
+
+{
+    "AttachmentId": "eni-attach-08b6880ccb780cb28",
+    "NetworkCardIndex": 0
+}
+
+Failed need to retry.
