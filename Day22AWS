@@ -1,3 +1,5 @@
+Day 21: Setting Up an EC2 Instance with an Elastic IP for Application Hosting
+
 The instance will be named xfusion-ec2, and the Elastic IP will be named xfusion-eip. 
 This setup will help the Development Team to have a reliable and consistent access point for their application.
 Create an EC2 instance named xfusion-ec2 using any linux AMI like ubuntu
